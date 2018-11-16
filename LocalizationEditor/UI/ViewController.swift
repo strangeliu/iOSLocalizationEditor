@@ -119,11 +119,25 @@ class ViewController: NSViewController {
             }
         }
     }
+    
+    override func prepare(for segue: NSStoryboardSegue, sender: Any?) {
+        if let controller = segue.destinationController as? NSWindowController, let c = controller.contentViewController as? AddStringViewController {
+            c.dataSource = self.dataSource
+            c.didAddKey = {
+                self.tableView.reloadData()
+            }
+        }
+    }
+    
+    override func performSegue(withIdentifier identifier: NSStoryboard.SegueIdentifier, sender: Any?) {
+        
+    }
 }
 
 // MARK: - Delegate
 
 extension ViewController: NSTableViewDelegate {
+    
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         guard let identifier = tableColumn?.identifier else {
             return nil
@@ -132,8 +146,13 @@ extension ViewController: NSTableViewDelegate {
         switch identifier.rawValue {
         case "key":
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: KeyCell.identifier), owner: self)! as! KeyCell
-            cell.key = dataSource.getKey(row: row)
-            return cell
+            if let key = dataSource.getKey(row: row) {
+                cell.key = key
+                return cell
+            } else {
+                let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: LocalizationCell.identifier), owner: self)! as! LocalizationCell
+                return cell
+            }
         default:
             let language = identifier.rawValue
             let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: LocalizationCell.identifier), owner: self)! as! LocalizationCell
@@ -143,9 +162,12 @@ extension ViewController: NSTableViewDelegate {
             return cell
         }
     }
+    
+    
 }
 
 extension ViewController: LocalizationCellDelegate {
+    
     func userDidUpdateLocalizationString(language: String, string: LocalizationString, with value: String) {
         dataSource.updateLocalization(language: language, string: string, with: value)
     }

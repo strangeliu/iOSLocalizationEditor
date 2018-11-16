@@ -9,6 +9,7 @@
 import Cocoa
 
 protocol LocalizationCellDelegate: class {
+    
     func userDidUpdateLocalizationString(language: String, string: LocalizationString, with value: String)
 }
 

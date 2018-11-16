@@ -16,13 +16,12 @@
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <menu key="submenu" title="LocalizationEditor" systemMenu="apple" id="uQy-DD-JDr">
                                     <items>
-                                        <menuItem title="About LocalizationEditor" id="5kV-Vb-QxS">
+                                        <menuItem id="5kV-Vb-QxS">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                             <connections>
                                                 <action selector="orderFrontStandardAboutPanel:" target="Ady-hI-5gd" id="Exp-CZ-Vem"/>
                                             </connections>
                                         </menuItem>
-                                        <menuItem isSeparatorItem="YES" id="VOq-y0-SEH"/>
                                         <menuItem isSeparatorItem="YES" id="wFC-TO-SCJ"/>
                                         <menuItem title="Services" id="NMo-om-nkz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -285,6 +284,32 @@
                             <menuItem title="Select" id="3lY-JD-VuH">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
+                            <menuItem title="Window" id="ywy-xa-6On">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                                <menu key="submenu" title="Window" systemMenu="window" id="Oix-B3-RJ9">
+                                    <items>
+                                        <menuItem title="Minimize" keyEquivalent="m" id="2MJ-9i-Akh">
+                                            <connections>
+                                                <action selector="performMiniaturize:" target="Ady-hI-5gd" id="KiG-50-fln"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Zoom" id="JB5-nX-4hM">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="performZoom:" target="Ady-hI-5gd" id="VxO-RE-i1Y"/>
+                                            </connections>
+                                        </menuItem>
+                                        <menuItem title="Close" keyEquivalent="w" id="Phh-WY-5XU"/>
+                                        <menuItem isSeparatorItem="YES" id="OYn-hW-6DN"/>
+                                        <menuItem title="Bring All to Front" id="hKb-rJ-3ps">
+                                            <modifierMask key="keyEquivalentModifierMask"/>
+                                            <connections>
+                                                <action selector="arrangeInFront:" target="Ady-hI-5gd" id="dDp-zI-oZU"/>
+                                            </connections>
+                                        </menuItem>
+                                    </items>
+                                </menu>
+                            </menuItem>
                         </items>
                     </menu>
                     <connections>
@@ -361,40 +386,61 @@
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="orS-Om-jEF">
                                 <rect key="frame" x="321" y="200" width="16" height="16"/>
                             </progressIndicator>
-                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZFg-5m-6pC">
-                                <rect key="frame" x="84" y="390" width="577" height="25"/>
-                                <popUpButtonCell key="cell" type="push" title="Open folder first" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" selectedItem="NVn-GV-ID4" id="4aK-eh-T5Y">
-                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                    <font key="font" metaFont="menu"/>
-                                    <menu key="menu" id="5W8-5b-o7R">
-                                        <items>
-                                            <menuItem title="Open folder first" state="on" id="NVn-GV-ID4"/>
-                                        </items>
-                                    </menu>
-                                </popUpButtonCell>
-                            </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16j-oD-cAE">
-                                <rect key="frame" x="3" y="395" width="75" height="17"/>
-                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="String table" id="z8U-Ny-4JF">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
+                            <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PQP-yy-gqx">
+                                <rect key="frame" x="5" y="393" width="324" height="21"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="16j-oD-cAE">
+                                        <rect key="frame" x="-2" y="2" width="75" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="String table" id="z8U-Ny-4JF">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZFg-5m-6pC">
+                                        <rect key="frame" x="78" y="-3" width="137" height="25"/>
+                                        <popUpButtonCell key="cell" type="push" title="Open folder first" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="border" inset="2" selectedItem="NVn-GV-ID4" id="4aK-eh-T5Y">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="menu"/>
+                                            <menu key="menu" id="5W8-5b-o7R">
+                                                <items>
+                                                    <menuItem title="Open folder first" state="on" id="NVn-GV-ID4"/>
+                                                </items>
+                                            </menu>
+                                        </popUpButtonCell>
+                                    </popUpButton>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="UE0-zU-sMa">
+                                        <rect key="frame" x="221" y="1" width="103" height="19"/>
+                                        <buttonCell key="cell" type="roundRect" title="Add New String" bezelStyle="roundedRect" alignment="center" state="on" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1ug-5J-0ge">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="cellTitle"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <segue destination="Kbl-9W-J30" kind="modal" id="x1g-TY-feM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="ZFg-5m-6pC" firstAttribute="leading" secondItem="16j-oD-cAE" secondAttribute="trailing" constant="10" id="D6G-Vj-vzc"/>
                             <constraint firstItem="4ba-Nv-4Q4" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="24" id="Fcq-O0-4L6"/>
-                            <constraint firstAttribute="trailing" secondItem="ZFg-5m-6pC" secondAttribute="trailing" id="I29-aq-1Lr"/>
-                            <constraint firstItem="ZFg-5m-6pC" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="2" id="PJB-vg-X9o"/>
+                            <constraint firstItem="PQP-yy-gqx" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="5" id="RZc-cb-qeo"/>
                             <constraint firstAttribute="trailing" secondItem="4ba-Nv-4Q4" secondAttribute="trailing" id="U2K-bp-ktM"/>
+                            <constraint firstItem="PQP-yy-gqx" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="2" id="XEf-7s-nzD"/>
                             <constraint firstItem="4ba-Nv-4Q4" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" id="aFu-bj-BOT"/>
                             <constraint firstItem="orS-Om-jEF" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="cdU-Z2-VjR"/>
-                            <constraint firstItem="4ba-Nv-4Q4" firstAttribute="top" secondItem="ZFg-5m-6pC" secondAttribute="bottom" constant="1" id="fUC-6L-ChH"/>
                             <constraint firstAttribute="bottom" secondItem="4ba-Nv-4Q4" secondAttribute="bottom" id="m5c-j8-Z7f"/>
-                            <constraint firstItem="16j-oD-cAE" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="5" id="osA-pP-jh6"/>
                             <constraint firstItem="orS-Om-jEF" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="p93-Be-Z2I"/>
-                            <constraint firstItem="16j-oD-cAE" firstAttribute="centerY" secondItem="ZFg-5m-6pC" secondAttribute="centerY" id="rs9-h5-XO3"/>
                         </constraints>
                     </view>
                     <connections>
@@ -407,6 +453,88 @@
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="780"/>
+        </scene>
+        <!--Window Controller-->
+        <scene sceneID="QiD-zF-UTn">
+            <objects>
+                <windowController id="Kbl-9W-J30" sceneMemberID="viewController">
+                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="asV-AN-Owy">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="245" y="301" width="480" height="270"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <connections>
+                            <outlet property="delegate" destination="Kbl-9W-J30" id="EIA-Y0-4Bm"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <segue destination="EaS-yo-M9e" kind="relationship" relationship="window.shadowedContentViewController" id="Wqa-Vq-f3O"/>
+                    </connections>
+                </windowController>
+                <customObject id="00y-ff-0S3" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="724" y="444"/>
+        </scene>
+        <!--Add String View Controller-->
+        <scene sceneID="PCF-Qa-74e">
+            <objects>
+                <viewController id="EaS-yo-M9e" customClass="AddStringViewController" customModule="LocalizationEditor" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="LCA-oW-hKa">
+                        <rect key="frame" x="0.0" y="0.0" width="236" height="117"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a3X-vw-4tD">
+                                <rect key="frame" x="68" y="65" width="133" height="22"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="huq-ey-Qz2">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pWY-yK-zrd">
+                                <rect key="frame" x="14" y="9" width="87" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Add" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="S5n-zW-nuE">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addButtonAction:" target="EaS-yo-M9e" id="Jsg-Ie-wRO"/>
+                                </connections>
+                            </button>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eHl-Kc-Z76">
+                                <rect key="frame" x="114" y="9" width="93" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="fiH-L5-vaK">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancelButtonAction:" target="EaS-yo-M9e" id="rl0-bp-DY5"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cLk-ng-DbP">
+                                <rect key="frame" x="24" y="70" width="27" height="17"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Key" id="sc1-hV-tew">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="textField" destination="a3X-vw-4tD" id="Hd5-WZ-d9b"/>
+                    </connections>
+                </viewController>
+                <customObject id="LDB-ES-vfd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="602" y="844.5"/>
         </scene>
     </scenes>
 </document>

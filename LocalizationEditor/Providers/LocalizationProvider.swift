@@ -26,14 +26,16 @@ class LocalizationProvider {
         
         Log.debug?.message("Found \(localizationFiles) localization files")
         
-        return localizationFiles.map({ (path, files) in
-            let name = URL(fileURLWithPath: path).lastPathComponent
-            return LocalizationGroup(name: name, localizations: files.map({ file in
-                let parts = file.path.split(separator: "/")
-                let lang = String(parts[parts.count - 2]).replacingOccurrences(of: ".lproj", with: "")
-                return Localization(language: lang, translations: getLocalizationStrings(path: file.path), path: file.path)
-            }), path: path)
-        }).sorted(by: {$0.name < $1.name})
+        return localizationFiles
+            .map({ (path, files) in
+                let name = URL(fileURLWithPath: path).lastPathComponent
+                return LocalizationGroup(name: name, localizations: files.map({ file in
+                    let parts = file.path.split(separator: "/")
+                    let lang = String(parts[parts.count - 2]).replacingOccurrences(of: ".lproj", with: "")
+                    return Localization(language: lang, translations: getLocalizationStrings(path: file.path), path: file.path)
+                }), path: path)
+            })
+            .sorted(by: {$0.name < $1.name})
     }
 
     private func getLocalizationStrings(path: String) -> [LocalizationString] {
@@ -65,6 +67,9 @@ class LocalizationProvider {
 
         string.update(value: value)
 
+        if !localization.translations.map({$0.key}).contains(string.key) {
+            localization.add(string: string)
+        }
         let data = localization.translations.map { string in
             "\"\(string.key)\" = \"\(string.value.replacingOccurrences(of: "\"", with: "\\\""))\";"
         }.reduce("") { prev, next in
@@ -78,4 +83,22 @@ class LocalizationProvider {
             Log.error?.message("Writing localization file for \(localization) failed with \(error)")
         }
     }
+    
+    func save(localizations: [Localization]) {
+        for localization in localizations {
+            let data = localization.translations.map { string in
+                "\"\(string.key)\" = \"\(string.value.replacingOccurrences(of: "\"", with: "\\\""))\";"
+                }.reduce("") { prev, next in
+                    "\(prev)\n\(next)"
+            }
+            
+            do {
+                try data.write(toFile: localization.path, atomically: false, encoding: .utf8)
+                Log.debug?.message("Localization file for \(localization) updated")
+            } catch {
+                Log.error?.message("Writing localization file for \(localization) failed with \(error)")
+            }
+        }
+    }
+
 }

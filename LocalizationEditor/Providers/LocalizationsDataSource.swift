@@ -54,9 +54,12 @@ class LocalizationsDataSource: NSObject, NSTableViewDataSource {
         return (row < masterLocalization?.translations.count ?? 0) ? masterLocalization?.translations[row].key : nil
     }
 
-    func getLocalization(language: String, row: Int) -> LocalizationString {
+    func getLocalization(language: String, row: Int) -> LocalizationString? {
         guard let localization = localizations.first(where: { $0.language == language }), let masterLocalization = masterLocalization else {
             fatalError()
+        }
+        guard masterLocalization.translations.count > row else {
+            return nil
         }
         return localization.translations.first(where: { $0.key == masterLocalization.translations[row].key }) ?? LocalizationString(key: masterLocalization.translations[row].key, value: "")
     }
@@ -67,10 +70,17 @@ class LocalizationsDataSource: NSObject, NSTableViewDataSource {
         }
         localizationProvider.updateLocalization(localization: localization, string: string, with: value)
     }
+    
+    func add(key: String) {
+        for localization in localizations {
+            localization.add(string: LocalizationString(key: key, value: ""))
+        }
+        localizationProvider.save(localizations: localizations)
+    }
 
     // MARK: - Delegate
 
     func numberOfRows(in _: NSTableView) -> Int {
-        return numberOfKeys
+        return numberOfKeys + 1
     }
 }
