@@ -370,14 +370,14 @@
 				CODE_SIGN_ENTITLEMENTS = LocalizationEditor/LocalizationEditor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = S6EJ3ZVM4G;
+				DEVELOPMENT_TEAM = 78P8K6HE5B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = LocalizationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sk.kulman.LocalizationEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = app.svn.LocalizationEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
@@ -390,14 +390,14 @@
 				CODE_SIGN_ENTITLEMENTS = LocalizationEditor/LocalizationEditor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = S6EJ3ZVM4G;
+				DEVELOPMENT_TEAM = 78P8K6HE5B;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
 				);
 				INFOPLIST_FILE = LocalizationEditor/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = sk.kulman.LocalizationEditor;
+				PRODUCT_BUNDLE_IDENTIFIER = app.svn.LocalizationEditor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 			};
