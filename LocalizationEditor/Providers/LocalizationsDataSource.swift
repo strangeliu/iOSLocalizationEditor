@@ -76,6 +76,7 @@ class LocalizationsDataSource: NSObject, NSTableViewDataSource {
             localization.add(string: LocalizationString(key: key, value: ""))
         }
         localizationProvider.save(localizations: localizations)
+        numberOfKeys += 1
     }
 
     // MARK: - Delegate
