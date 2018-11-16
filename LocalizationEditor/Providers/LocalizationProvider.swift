@@ -11,7 +11,7 @@ import Files
 import Foundation
 
 class LocalizationProvider {
-    private let ignoredDirectories = ["Carthage", "build", ".framework"]
+    private let ignoredDirectories = ["Carthage", "Pods", "build", ".framework"]
     
     func getLocalizations(url: URL) -> [LocalizationGroup] {
         Log.debug?.message("Searching \(url) for Localizable.strings")
