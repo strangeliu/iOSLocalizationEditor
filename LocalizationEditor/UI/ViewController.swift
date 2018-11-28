@@ -163,6 +163,33 @@ extension ViewController: NSTableViewDelegate {
         }
     }
     
+    func tableViewColumnDidResize(_ notification: Notification) {
+        let allIndex = IndexSet(integersIn:0..<self.tableView.numberOfRows)
+        tableView.noteHeightOfRows(withIndexesChanged: allIndex)
+    }
+    
+    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
+        let width = tableView.bounds.width / CGFloat(tableView.numberOfColumns)
+        var height: CGFloat = 30
+        for (offset, column) in tableView.tableColumns.enumerated() {
+            var string: String?
+            if column.identifier.rawValue == "key" {
+                if let key = dataSource.getKey(row: row) {
+                    string = key
+                }
+            } else {
+                let language = column.identifier.rawValue
+                string = (row < dataSource.numberOfRows(in: tableView) ? dataSource.getLocalization(language: language, row: row) : nil)?.value
+            }
+            if let string = string {
+                let size = (string as NSString).boundingRect(with: NSSize(width: width, height: CGFloat.greatestFiniteMagnitude), options: NSString.DrawingOptions.usesLineFragmentOrigin, attributes: [.font: NSFont.systemFont(ofSize: 13)])
+                if size.height > height {
+                    height = size.height
+                }
+            }
+        }
+        return height
+    }
     
 }
 
